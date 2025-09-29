@@ -1,13 +1,13 @@
-# Problem statement:
+# Problem statement
 `I know secret key to public key that is among the given list of public keys (merkle tree) in the consensus.`
 
-# Goal:
+# Goal
 `The goal is to identify that the given public key is among the list without revealing the public key itself.`
 
 ## Let's Get Started
 - Create a directory `outputs` to store the compiled files
 
-# 1- To compile:
+# 1- Compile the Circuit
 ```bash
 circom ./test/circuits/mkt2_circuit.circom --r1cs --wasm --sym -o outputs`
 ```
@@ -26,13 +26,13 @@ node ./outputs/mkt2_circuit_js/generate_witness.js ./outputs/mkt2_circuit_js/mkt
 
 ## Powers of Tau Phase-1
 
-### First, we start a new "powers of tau" ceremony:
+### First, we start a new "powers of tau" ceremony
 
 ```bash
 snarkjs powersoftau new bn128 12 pot12_0000.ptau -v`
 ```
 
-### Then, we contribute to the ceremony:
+### Then, we contribute to the ceremony
 
 ```bash
 snarkjs powersoftau contribute pot12_0000.ptau pot12_0001.ptau --name="First contribution" -v`
@@ -40,7 +40,7 @@ snarkjs powersoftau contribute pot12_0000.ptau pot12_0001.ptau --name="First con
 
 ## Powers of Tau Phase-2
 
-- The phase 2 is circuit-specific. Execute the following command to start the generation of this phase:
+- The phase 2 is circuit-specific. Execute the following command to start the generation of this phase
 
 ```bash
 snarkjs powersoftau prepare phase2 pot12_0001.ptau pot12_final.ptau -v`
@@ -48,12 +48,12 @@ snarkjs powersoftau prepare phase2 pot12_0001.ptau pot12_final.ptau -v`
 
 Next, we generate a .zkey file that will contain the proving and verification keys together with all phase 2 contributions
 
-- Execute the following command to start a new zkey:
+- Execute the following command to start a new zkey
 ```bash
 snarkjs groth16 setup outputs/mkt2_circuit.r1cs pot12_final.ptau mkt2_circuit_0000.zkey`
 ```
 
-- Contribute to the phase 2 of the ceremony:
+- Contribute to the phase 2 of the ceremony
 ```bash
 snarkjs zkey contribute mkt2_circuit_0000.zkey mkt2_circuit_0001.zkey --name="1st Contributor Name" -v`
 ```
@@ -66,7 +66,7 @@ snarkjs zkey export verificationkey mkt2_circuit_0001.zkey verification_key.json
 
 # 5- Generating a Proof
 
-- Once the witness is computed and the trusted setup is already executed, we can generate a zk-proof associated to the circuit and the witness:
+- Once the witness is computed and the trusted setup is already executed, we can generate a zk-proof associated to the circuit and the witness.
 - This command generates a Groth16 proof and outputs two files:
   1- proof.json: it contains the proof.
   2- public.json: it contains the values of the public inputs and outputs.
@@ -77,7 +77,7 @@ snarkjs groth16 prove mkt2_circuit_0001.zkey witness.wtns proof.json public.json
 
 ## Verifying a Proof
 
-- To verify the proof, execute the following command:
+- To verify the proof, execute the following command
 ```bash
 snarkjs groth16 verify verification_key.json public.json proof.json`
 ```
@@ -89,12 +89,12 @@ snarkjs groth16 verify verification_key.json public.json proof.json`
 
 - It is also possible to generate a Solidity verifier that allows verifying proofs on Ethereum blockchain.
 
-- First, we need to generate the Solidity code using the command:
+- First, we need to generate the Solidity code using the command
 ```bash
 snarkjs zkey export solidityverifier mkt2_circuit_0001.zkey solidity/verifier.sol`
 ```
 
-- The Verifier has a view function called verifyProof that returns TRUE if and only if the proof and the inputs are valid. To facilitate the call, you can use snarkJS to generate the parameters of the call by typing:
+- The Verifier has a view function called verifyProof that returns TRUE if and only if the proof and the inputs are valid. To facilitate the call, you can use snarkJS to generate the parameters of the call by typing
 
 ```bash
 snarkjs generatecall`
