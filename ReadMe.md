@@ -1,5 +1,11 @@
 ## Compute multiplication of 2 numbers
 
+# Problem statement:
+`I know secret key to public key that is among the given list of public keys (merkle tree) in the consensus.`
+
+# Goal:
+`The goal is to identify that the given public key is among the list without revealing the public key itself.`
+
 - Create a directory `outputs` to store the compiled files
 
 # 1- To compile:
