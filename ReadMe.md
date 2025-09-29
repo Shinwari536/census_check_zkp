@@ -1,5 +1,3 @@
-## Compute multiplication of 2 numbers
-
 # Problem statement:
 `I know secret key to public key that is among the given list of public keys (merkle tree) in the consensus.`
 
