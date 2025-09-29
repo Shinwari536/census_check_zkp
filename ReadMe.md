@@ -1,6 +1,5 @@
 ## Compute multiplication of 2 numbers
 
-- Assuming the result will be 33n is the in the given list.
 - Create a directory `outputs` to store the compiled files
 
 # 1- To compile:
