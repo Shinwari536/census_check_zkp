@@ -1,0 +1,22 @@
+{
+  "name": "census-check",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha \"test/**/*.js\""
+  },
+  "keywords": [
+    "voting",
+    "zksnark"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "circom_tester": "^0.0.24",
+    "circomlib": "^2.0.0",
+    "circomlibjs": "^0.1.7",
+    "mocha": "^11.7.2"
+  }
+}
